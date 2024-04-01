@@ -1,1 +1,40 @@
-apiVersoin: 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot
+  labels:
+    app: spring-boot-app
+    #type: front-end_lvm
+
+spec:
+  template:
+    metadata:
+      name: spring-boot
+      labels:
+        app: lvm
+        # type: front-end_lvm
+    spec:
+      containers:
+      - name: spring-boot
+        image: registry.prashanthgr.private:5000/spring-boot-app:${IMG_TAG}
+  replicas: 2
+  selector:
+    matchLabels:
+      app: lvm
+      #type: front-end_lvm
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot-app-service
+
+spec:
+  selector:
+      app: spring-boot-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
