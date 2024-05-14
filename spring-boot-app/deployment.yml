@@ -4,7 +4,7 @@ metadata:
   name: spring-boot
   labels:
     app: spring-boot-app
-  namespace: spring-boot
+  namespace: spring-boot-app
 
 spec:
   template:
