@@ -28,6 +28,7 @@ spring-boot   38d
 # - get projec details
 ```
 # argocd proj get <project name>
+# argocd proj get spring-boot -o yaml -- form yaml format
 
 root@kmaster1-115:~# argocd proj get spring-boot
 Name:                        spring-boot
