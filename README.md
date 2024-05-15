@@ -41,3 +41,10 @@ Scoped Clusters:             <none>
 Denied Namespaced Resources: <none>
 Signature keys:              <none>
 ```
+# - check ARGOCD_RECONCILIATION_TIMEOUT
+```
+root@kmaster1-115:~# kubectl describe po argocd-repo-server -n argocd  | grep -i "ARGOCD_RECONCILIATION_TIMEOUT" -B1
+    Environment:
+      ARGOCD_RECONCILIATION_TIMEOUT:                                <set to the key 'timeout.reconciliation' of config map 'argocd-cm'>                                          Optional: true
+```
+
