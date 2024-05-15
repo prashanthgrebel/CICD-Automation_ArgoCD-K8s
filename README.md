@@ -59,7 +59,8 @@ configmap/argocd-cm patched
 root@kmaster1-115:~# kubectl rollout restart deploy argocd-repo-server -n argocd
 deployment.apps/argocd-repo-server restarted
 root@kmaster1-115:~# 
-
+```
+# - RECONCILIATION WEBHOOK
 
 
 
