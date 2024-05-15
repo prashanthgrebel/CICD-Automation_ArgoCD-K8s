@@ -42,8 +42,8 @@ Denied Namespaced Resources: <none>
 Signature keys:              <none>
 ```
 # RECONCILIATION
-# 1. RECONCILIATION TIMEOUT
-# 2. RECONCILIATION WEBHOOK
+* 1. RECONCILIATION TIMEOUT
+* 2. RECONCILIATION WEBHOOK
 
 # - check ARGOCD_RECONCILIATION_TIMEOUT
 ```
