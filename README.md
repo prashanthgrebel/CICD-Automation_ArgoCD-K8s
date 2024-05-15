@@ -66,8 +66,18 @@ root@kmaster1-115:~#
 
 
 # RBAC
+# * List users
+```
+root@kmaster1-115:~# argocd account list
+NAME   ENABLED  CAPABILITIES
+admin  true     login
+pavi   true     login
+rebel  true     login
+root@kmaster1-115:~# 
 
-* 1. add users to argocd-cm as below
+```
+
+# * 1. add users to argocd-cm as below
 ```
 data:
   accounts.pavi: login, apikey
@@ -95,7 +105,7 @@ metadata:
   resourceVersion: "1063914"
   uid: 3018c518-b128-488e-a444-5682d6cd861b
 ```
-* 2. Create RBAC policy in argocd-rbac-cm
+# * 2. Create RBAC policy in argocd-rbac-cm
 ```
 data:
   policy.csv: |
