@@ -65,3 +65,65 @@ root@kmaster1-115:~#
 ![image](https://github.com/prashanthgrebel/CICD-Automation_ArgoCD-K8s/assets/92351464/75f708d4-276f-41d0-b843-8249018a2ea9)
 
 
+# RBAC
+
+* 1. add users to argocd-cm as below
+```
+data:
+  accounts.pavi: login, apikey
+  accounts.rebel: login, apikey
+```
+
+
+```
+apiVersion: v1
+data:
+  accounts.pavi: login, apikey
+  accounts.rebel: login, apikey
+  timeout.reconciliation: 60s
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"accounts.rebel":"login","policy.cvs":"p, role:rebel, applications, sync, */*, allow\n","timeout.reconciliation":"60s"},"kind":"ConfigMap","metadata":{"annotations":{},"creationTimestamp":"2024-04-05T13:41:11Z","labels":{"app.kubernetes.io/name":"argocd-cm","app.kubernetes.io/part-of":"argocd"},"name":"argocd-cm","namespace":"argocd","resourceVersion":"1040211","uid":"3018c518-b128-488e-a444-5682d6cd861b"}}
+  creationTimestamp: "2024-04-05T13:41:11Z"
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+  name: argocd-cm
+  namespace: argocd
+  resourceVersion: "1063914"
+  uid: 3018c518-b128-488e-a444-5682d6cd861b
+```
+* 2. Create RBAC policy in argocd-rbac-cm
+```
+data:
+  policy.csv: |
+    p, role:org-admin, applications, *, default/*, allow
+    g, rebel, role:org-admin
+```
+```
+apiVersion: v1
+data:
+  policy.csv: |
+    p, role:org-admin, applications, *, default/*, allow
+    g, rebel, role:org-admin
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"policy.csv":"p, role:org-admin, applications, *, *, allow\ng, pavi, role:org-admin\n"},"kind":"ConfigMap","metadata":{"annotations":{},"creationTimestamp":"2024-04-05T13:41:11Z","labels":{"app.kubernetes.io/name":"argocd-rbac-cm","app.kubernetes.io/part-of":"argocd"},"name":"argocd-rbac-cm","namespace":"argocd","resourceVersion":"755313","uid":"dd0441a9-7b22-4b2b-a383-a8d850d91a0c"}}
+  creationTimestamp: "2024-04-05T13:41:11Z"
+  labels:
+    app.kubernetes.io/name: argocd-rbac-cm
+    app.kubernetes.io/part-of: argocd
+  name: argocd-rbac-cm
+  namespace: argocd
+  resourceVersion: "1052797"
+  uid: dd0441a9-7b22-4b2b-a383-a8d850d91a0c
+```
+
+* Refer : https://argo-cd.readthedocs.io/en/stable/operator-manual/argocd-rbac-cm-yaml/
+* Refer : https://argo-cd.readthedocs.io/en/stable/operator-manual/rbac/
+
+
