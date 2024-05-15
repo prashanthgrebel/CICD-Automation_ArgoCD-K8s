@@ -47,4 +47,15 @@ root@kmaster1-115:~# kubectl describe po argocd-repo-server -n argocd  | grep -i
     Environment:
       ARGOCD_RECONCILIATION_TIMEOUT:                                <set to the key 'timeout.reconciliation' of config map 'argocd-cm'>                                          Optional: true
 ```
+# - patch /modify ARGOCD_RECONCILIATION_TIMEOUT
+```
+root@kmaster1-115:~# kubectl patch configmap argocd-cm --patch='{"data":{"timeout.reconciliation":"60s"}}' -n argocd 
+configmap/argocd-cm patched
+
+root@kmaster1-115:~# kubectl rollout restart deploy argocd-repo-server -n argocd
+deployment.apps/argocd-repo-server restarted
+root@kmaster1-115:~# 
+
+
+
 
