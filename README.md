@@ -62,5 +62,6 @@ root@kmaster1-115:~#
 ```
 # - RECONCILIATION WEBHOOK
 
+![image](https://github.com/prashanthgrebel/CICD-Automation_ArgoCD-K8s/assets/92351464/75f708d4-276f-41d0-b843-8249018a2ea9)
 
 
